@@ -1,31 +1,28 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var debugMessage: String = "shortcut 待機中"
     @State private var isCommandPressed = false
+    @StateObject private var viewModel = PostViewModel()
+    @State private var selectedPostID: UUID?
+    
+    var selectedPost: Post? {
+        viewModel.posts.first { $0.id == selectedPostID }
+    }
+    
     var body: some View {
-//        HStack(spacing: 0) {
-//            PostListView()
-//                .frame(width: 300)
-//                .background(Color.gray.opacity(0.2))
-//            
-//            VStack(spacing: 0) {
-//                PostTitleView()
-//                    .frame(height: 50)
-//                    .background(Color.blue.opacity(0.2))
-//                PostContentView()
-//                    .background(Color.black)
-//            }
-//            .frame(maxWidth: .infinity)
-//            
-//        }
-//        .frame(maxHeight: .infinity)
-        VStack {
-            Text(debugMessage)
-                .padding()
+        HStack(spacing: 0) {
+            PostListView(viewModel: viewModel, selectedPostID: $selectedPostID)
+                .frame(width: 300)
+            
+            if let post = selectedPost {
+                PostDetailView(viewModel: viewModel, post: post)
+                    .frame(maxWidth: .infinity)
+            } else {
+                Text("No post selected")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .foregroundColor(.gray)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white)
         .onAppear(){
             setupKeyListener()
         }
@@ -39,31 +36,11 @@ struct ContentView: View {
         
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
             if isCommandPressed && event.keyCode == 45 {
-                print("key pressed!")
-                
+                viewModel.addPost(title: "タイトル", content: "本文")
                 NSApp.keyWindow?.makeFirstResponder(nil)
                 return nil
             }
             return event
-        }
-    }
-}
-
-// 仮の PostTitleView
-struct PostTitleView: View {
-    var body: some View {
-        Text("Post Title")
-            .font(.headline)
-            .padding()
-    }
-}
-
-// 仮の PostContentView
-struct PostContentView: View {
-    var body: some View {
-        ScrollView {
-            Text("ここに Post の内容が入ります。\n\n長いテキストでも OK")
-                .padding()
         }
     }
 }

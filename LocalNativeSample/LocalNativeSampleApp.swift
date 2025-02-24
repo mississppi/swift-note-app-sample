@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct LocalNativeSampleApp: App {
+    @StateObject private var viewModel = PostViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
         }
     }
 }

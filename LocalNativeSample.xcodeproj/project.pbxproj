@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		12BEB36C2D68BD3400A3E13E /* Post.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12BEB36A2D68BD3400A3E13E /* Post.xcdatamodeld */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		12BEB34E2D68BBD000A3E13E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -31,7 +27,6 @@
 		12BEB33C2D68BBCD00A3E13E /* LocalNativeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalNativeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12BEB34D2D68BBD000A3E13E /* LocalNativeSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalNativeSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12BEB3572D68BBD000A3E13E /* LocalNativeSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalNativeSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		12BEB36B2D68BD3400A3E13E /* Post.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Post.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -80,7 +75,6 @@
 		12BEB3332D68BBCD00A3E13E = {
 			isa = PBXGroup;
 			children = (
-				12BEB36A2D68BD3400A3E13E /* Post.xcdatamodeld */,
 				12BEB33E2D68BBCD00A3E13E /* LocalNativeSample */,
 				12BEB3502D68BBD000A3E13E /* LocalNativeSampleTests */,
 				12BEB35A2D68BBD000A3E13E /* LocalNativeSampleUITests */,
@@ -242,7 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12BEB36C2D68BD3400A3E13E /* Post.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,19 +541,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		12BEB36A2D68BD3400A3E13E /* Post.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				12BEB36B2D68BD3400A3E13E /* Post.xcdatamodel */,
-			);
-			currentVersion = 12BEB36B2D68BD3400A3E13E /* Post.xcdatamodel */;
-			path = Post.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 12BEB3342D68BBCD00A3E13E /* Project object */;
 }
