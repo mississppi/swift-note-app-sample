@@ -1,7 +1,12 @@
 import CoreData
 
 struct CoreDataService {
-    private let context = PersistenceController.shared.context
+//    private let context = PersistenceController.shared.context
+    private let context: NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext = PersistenceController.shared.context) {
+        self.context = context
+    }
     
     func fetchPosts() -> [Post]{
         let request: NSFetchRequest<Post> = Post.fetchRequest()
@@ -35,7 +40,6 @@ struct CoreDataService {
     
     func updatePost(_ post: Post) {
         post.updatedAt = Date()
-        
         saveContext()
     }
     
@@ -53,8 +57,6 @@ struct CoreDataService {
         }
     }
 
-
-    
     private func saveContext() {
         do {
             try context.save()
