@@ -15,20 +15,12 @@ struct PostDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            TextField("Enter title ", text: $title)
-                .onChange(of: title) {
-                    saveChanges()
-                }
+            TitleTextFieldView(title: $title, onSave: saveChanges)
                 
                 Divider()
                 
                 ScrollView {
-                    TextField("enter content ", text: $content)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                        .onChange(of: content) {
-                            saveChanges()
-                        }
+                    ContentTextFieldView(content: $content, onSave: saveChanges)
                 }
         }
         .onAppear {
