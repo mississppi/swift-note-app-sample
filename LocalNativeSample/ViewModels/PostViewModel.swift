@@ -25,4 +25,9 @@ class PostViewModel: ObservableObject {
         coreDataService.updatePost(post)
         fetchPosts()
     }
+    
+    func deletePost(_ post: Post) {
+        coreDataService.deletePost(post)
+        fetchPosts()
+    }
 }

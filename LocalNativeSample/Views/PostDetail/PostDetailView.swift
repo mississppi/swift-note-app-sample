@@ -28,7 +28,7 @@ struct PostDetailView: View {
             title = post.title ?? ""
             content = post.content ?? ""
             
-            setupKeyListener()
+//            setupKeyListener()
         }
         .onChange(of: post.id) {
             title = post.title ?? ""
