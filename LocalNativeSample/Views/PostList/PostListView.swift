@@ -4,18 +4,26 @@ struct PostListView: View {
     @ObservedObject var viewModel: PostViewModel
     @Binding var selectedPostID: UUID?
     @State private var showMenuForPostID: UUID?
+    @State private var draggingPost: Post?
 
     var body: some View {
         NavigationView {
             List(viewModel.posts) { post in
                 HStack {
                     Text(post.title ?? "No title")
-                        .padding()
+                            .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(selectedPostID == post.id ? Color.gray.opacity(0.2) : Color.clear)
                         .onTapGesture {
                             print("taped")
                             selectedPostID = post.id
+                        }
+                        .onDrag {
+                            draggingPost = post
+                            guard let postID = post.id else {
+                                return NSItemProvider(object: "" as NSString)
+                            }
+                            return NSItemProvider(object: postID.uuidString as NSString)
                         }
                     Button(action: {
                         showMenuForPostID = post.id
@@ -34,20 +42,27 @@ struct PostListView: View {
                         VStack {
                             Button("update") {print("update")}
                             Button("delete") {
-                                print("delete")
-                                print(post.id)
-                                print(showMenuForPostID)
-                                print(selectedPostID)
                                 if let postToDelete = viewModel.posts.first(where: { $0.id == showMenuForPostID}) {
-                                    print("exec")
                                     viewModel.deletePost(postToDelete)
                                 }
-                                print("ed")
                             }
                         }
                         .padding()
                         .frame(width: 120)
                     }
+                }
+                .onDrop(of: ["public.text"], isTargeted: nil) { providers in
+                    guard let provider = providers.first else {return false}
+                    provider.loadObject(ofClass: NSString.self) { (uuidString, error) in
+                        DispatchQueue.main.async {
+                            guard let uuidString = uuidString as? String,
+                                  let movedPostID = UUID(uuidString: uuidString),
+                                  let movedPost = viewModel.posts.first(where: {$0.id == movedPostID }),
+                                  let targetPost = viewModel.posts.first(where: {$0.id == post.id }) else {return}
+                            viewModel.updateOrder(movedPost: movedPost, targetPost: targetPost)
+                        }
+                    }
+                    return true
                 }
             }
         }

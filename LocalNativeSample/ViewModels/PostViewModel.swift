@@ -26,6 +26,12 @@ class PostViewModel: ObservableObject {
         fetchPosts()
     }
     
+    func updateOrder(movedPost: Post, targetPost: Post) {
+        print("updateorder!!")
+        coreDataService.updateOrder(movedPost: movedPost, targetPost: targetPost)
+        fetchPosts()
+    }
+    
     func deletePost(_ post: Post) {
         coreDataService.deletePost(post)
         fetchPosts()

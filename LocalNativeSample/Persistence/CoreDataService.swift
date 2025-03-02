@@ -56,6 +56,12 @@ struct CoreDataService {
             return nil
         }
     }
+    
+    func updateOrder(movedPost: Post, targetPost: Post) {
+        let tempOrder = movedPost.order
+        movedPost.order = targetPost.order
+        targetPost.order = tempOrder
+    }
 
     private func saveContext() {
         do {
