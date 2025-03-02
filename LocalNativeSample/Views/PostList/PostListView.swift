@@ -14,6 +14,7 @@ struct PostListView: View {
                             .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(selectedPostID == post.id ? Color.gray.opacity(0.2) : Color.clear)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             print("taped")
                             selectedPostID = post.id
